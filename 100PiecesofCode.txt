@@ -1,0 +1,1330 @@
+﻿1)var languages = {
+    english: "Hello!",
+    french: "Bonjour!",
+    notALanguage: 4,
+    spanish: "Hola!"
+};
+
+
+// print hello in the 3 different languages
+for (var i in languages){
+        if (typeof languages[i] === "string"){
+                console.log (languages[i]);
+        }
+};
+Prints hello in 3 languages
+
+
+2)function Dog (breed) {
+    this.breed = breed;
+};
+
+
+// add the sayHello method to the Dog class 
+// so all dogs now can say hello
+Dog.prototype.sayHello = function (){console.log("Hello this is a " +this.breed + " dog");}
+
+
+var yourDog = new Dog("golden retriever");
+yourDog.sayHello();
+
+
+var myDog = new Dog("dachshund");
+myDog.sayHello();
+Demonstrates a use of .prototype to add methods to a class
+
+
+3)function StudentReport() {
+    var grade1 = 4;
+    var grade2 = 2;
+    var grade3 = 1;
+    var getGPA = function() {
+        return (this.grade1 + this.grade2 + this.grade3) / 3;
+    };
+}
+
+
+var myStudentReport = new StudentReport();
+
+
+for(var x in myStudentReport) {
+    if(typeof myStudentReport[x] !== "function") {
+        console.log("Muahaha! "+myStudentReport[x]);
+    }
+}
+
+
+console.log("Your overall GPA is "+myStudentReport.getGPA());
+A basic GPA calculator
+
+
+4)// complete these definitions so that they will have
+// the appropriate types
+var anObj = { job: "I'm an object!" };
+var aNumber = 42;
+var aString = "I'm a string!";
+
+
+console.log( typeof anObj); // should print "object"
+console.log(typeof aNumber  ); // should print "number"
+console.log(typeof aString  ); // should print "string"
+Demonstrates a usage of typeof
+
+
+5)var nyc = {
+    fullName: "New York City",
+    mayor: "Michael Bloomberg",
+    population: 8000000,
+    boroughs: 5
+};
+
+
+// write your for-in loop here
+for (var i in nyc){console.log(i);}
+Demonstrates a usage of for-in loops
+
+
+6)var nyc = {
+    fullName: "New York City",
+    mayor: "Michael Bloomberg",
+    population: 8000000,
+    boroughs: 5
+};
+
+
+// write a for-in loop to print the value of nyc's properties
+for (i in nyc){
+        console.log(nyc[i]);
+}
+Shows how for-in loops can cycle through properties in an object
+
+
+7)function Person(name,age) {
+  this.name = name;
+  this.age = age;
+};
+
+
+// Let's make bob again, using our constructor
+var bob = new Person("Bob Smith", 30);
+var susan = new Person("Susan Jordan", 35);
+
+
+// make your own class here
+function Circle(radius){
+        this.radius = radius;
+Demonstrates the steps to creating a class, and with it, objects
+
+
+
+
+8)function Cat(name, breed) {
+    this.name = name;
+    this.breed = breed;
+}
+
+
+// let's make some cats!
+var cheshire = new Cat("Cheshire Cat", "British Shorthair");
+var gary = new Cat("Gary", "Domestic Shorthair");
+
+
+// add a method "meow" to the Cat class that will allow
+// all cats to print "Meow!" to the console
+Cat.prototype.meow = function(){console.log("Meow!");};
+
+
+// add code here to make the cats meow!
+cheshire.meow();
+gary.meow();
+Explains how to spread methods from class to class with usage of prototype
+
+
+9)// the original Animal class and sayName method
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+}
+Animal.prototype.sayName = function() {
+    console.log("Hi my name is "+this.name);
+};
+
+
+// define a Penguin class
+function Penguin (name){this.numLegs = 2; this.name = name;}
+
+
+// set its prototype to be a new instance of Animal
+Penguin.prototype = new Animal();
+Penguin.sayName();
+Demonstrates how to use another class as a template for a new class with usage of prototype
+
+
+10)// original classes
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+    this.isAlive = true;
+}
+function Penguin(name) {
+    this.name = name;
+    this.numLegs = 2;
+}
+function Emperor(name) {
+    this.name = name;
+    this.saying = "Waddle waddle";
+}
+
+
+// set up the prototype chain
+Penguin.prototype = new Animal();
+Emperor.prototype = new Penguin();
+
+
+var myEmperor = new Emperor("Jules");
+
+
+console.log( myEmperor.saying ); // should print "Waddle waddle"
+console.log(myEmperor.numLegs  ); // should print 2
+console.log( myEmperor.isAlive ); // should print true
+Sets properties to different classes and shows how to output them
+
+
+11)function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+}
+
+
+// create your Person 
+var john = new Person("nakagawa", "l", 60);
+
+
+// try to print his bankBalance
+console.log(john.bankBalance);
+Demonstrates how to hide variables from the user
+
+
+12)function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+  
+   this.getBalance = function() {
+      // your code should return the bankBalance
+      return bankBalance;
+   };
+}
+
+
+var john = new Person('John','Smith',30);
+console.log(john.bankBalance);
+
+
+// create a new variable myBalance that calls getBalance()
+myBalance = john.getBalance();
+console.log(myBalance);
+Demonstrates a way to access hidden variables
+
+
+13) function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+  
+   this.askTeller = function(pass) {
+     if (pass == 1234) return bankBalance;
+     else return "Wrong password.";
+   };
+}
+
+
+var john = new Person('John','Smith',30);
+/* the variable myBalance should access askTeller()
+   with a password as an argument  */
+var myBalance = john.askTeller(1234);
+Sets up a password style function in order to gain access to a variable
+
+
+14) var card = Math.floor(Math.random())*52 +1;
+Demonstrates a usage of the javascript Math library to generate a random card from a deck
+
+
+15)function deal(){return Math.floor(Math.random()*52)+1;}
+
+
+// Declare two variables 
+// For both variables, assign values gotten by calling the function
+var card1 = deal();
+var card2 = deal();
+
+
+deal();
+Deals 2 cards from a deck
+
+
+16) // Our deal function will return one random card
+
+
+
+
+function deal(){return Math.floor(Math.random()*52)+1;}
+
+
+// Declare our two variables card1 and card2
+var card1 = deal();
+var card2 = deal();
+
+
+// Define a function called score, which will assign points by
+// adding up the cards: 
+function score(){return card1 + card2;}
+Adds in a score function to determine the score of your hand
+
+
+17) // Our deal function will return a random card
+
+
+function deal() {
+    card = Math.floor(Math.random()*52+1);
+    return card;}
+
+
+// Deal out our first hand by declaring variables card1 and card2
+
+
+var card1 = deal();
+var card2 = deal();
+
+
+
+
+
+
+function getValue(card){return card%13;}
+
+
+// Return the score of our hand
+
+
+function score(){return getValue(card1) + getValue(card2);}
+
+
+console.log("You have cards " + card1 + " and " + card2 +
+        " for a score of " + score());
+Returns the value of individual cards
+
+
+18) // Our deal function will return a random card
+var deal = function () {
+    card = Math.floor(Math.random()*52+1);
+    return card;
+};
+
+
+// Deal out our first hand
+var card1 = deal();
+var card2 = deal();
+
+
+// This function takes a card as a parameter and returns the value
+// of that card
+var getValue = function(card) {
+    // if its a face card, number should be set to 10
+    if( card%13 === 11 || card%13 === 12 ||card%13 === 0   ) {
+        return 10;
+    }
+    // Otherwise number should be set to card modulo 13
+    else {
+        return card % 13;
+    }
+};
+
+
+// Here make a function called score, which will assign points based
+// on the cards.  It should take the remainder
+var score = function() {
+    return getValue(card1) + getValue(card2);
+};
+
+
+console.log("You have cards " + card1 + " and " + card2 +
+        " for a score of " + score());
+Accounts for face cards in this revised code
+
+
+19) // Our deal function will return a random card
+var deal = function() {
+  card = Math.floor(Math.random()*52+1);
+  return card;
+};
+
+
+// Deal out our first hand
+var card1 = deal();
+var card2 = deal();
+
+
+// This function takes a card as a parameter and returns the value
+// of that card
+var getValue = function(card) {
+  // if its a face card, number should be set to 10
+   if( card%13 === 11 || card%13 === 12 ||card%13 === 0   ) {
+        return 10;
+    }
+    
+  // What if it's an ace?
+ else if( card%13 === 1 ) {
+        return 11;
+    }
+  // Otherwise, we just want its number value
+  else {return card%13;}
+}
+        
+// Score the hand
+function score() {
+  return getValue(card1) + getValue(card2);
+}
+
+
+console.log("You have cards " + card1 + " and " + card2 +
+        " for a score of " + score(card1, card2));
+Implements the unique usage of Aces in Blackjack
+
+
+20)function factorial(n) {
+  if (n === 0) {
+    return 1;
+  }
+  
+  // This is it! Recursion!!
+  return n * factorial(n - 1);
+}
+
+
+factorial(10);
+Demonstrates how to create a factorial function
+
+
+21)  function factorial(n) {
+  if (n < 0) {
+    // Termination condition to prevent infinite recursion
+    return console.log("negative numbers are not allowed.");
+    
+  }
+  // Base case
+  if (n === 0) {
+    return 1;
+  }
+  // Recursive case
+  return n * factorial(n -1);
+}
+
+
+factorial(-1);
+factorial(5);
+
+
+Demonstrates the base case and termination case in recursive functions
+
+
+22) // Create an empty array called "stack"
+var stack = [];
+// Here is our recursive function
+function power(base, exponent) {
+  // Base case 
+  if ( exponent === 0 ) {
+    return 1;
+  }
+  // Recursive case
+  else {
+        stack[exponent -1] = base * power(base, exponent - 1);
+    return         stack[exponent -1];
+  }
+}
+power(5,2);
+console.log(stack);
+Applies recursion to cycle through elements and secondary arrays in arrays
+
+
+23)  // Our array of messy words
+var capitals = ["berlin", "parIs", "MaDRiD"];
+
+
+// Capitalize function
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+
+// Our recursive function
+function fixLetterCase(array, i) {    //i=beginning index
+  // Base case
+  if (i === array.length) {
+    return; //return at end of word
+  } 
+  // Action
+  array[i] = capitalize(array[i]);
+  // Recursive case
+  return fixLetterCase(array, i + 1);
+}
+
+
+// Here is our function call
+fixLetterCase(capitals, 0);
+
+
+console.log(capitals);
+Demonstrates how recursion in arrays can be used to punctualize sentences or words
+
+
+24)  var capitals = [ ["berlin", "parIs", "MaDRiD"], 
+                 ["monTEvideo", "BrASiLia"],
+                 ["dElhi", "toKYo", "BeiJing"],
+                 ["CanBerra"],
+                 ["kiGaLi", "pretoRIA"] ];
+
+
+// Capitalize function
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+
+// Our recursive function
+function fixLetterCase(array, x, y) { //y is outside, x is inside array
+  if (y === array.length) { //if ouside array is done, return
+    return;
+  }
+  else if (x === array[y].length) { //if the inside array is at its end, increase outside array by 1
+    return fixLetterCase(array, 0, y + 1);
+  }
+  else { //otherwise, capitalize each index, ie (array[0][0] is now capitalized)
+    array[y][x] = capitalize(array[y][x]);
+    return fixLetterCase(array, x + 1, y);  //proceed with recursion, with inside array incremented
+  }        
+}
+
+
+fixLetterCase(capitals, 0, 0);
+
+
+console.log(capitals);
+Demonstrates how this can even apply to nested arrays
+
+
+25)  function guessNumber(number, clue) {
+  // Prompt the user for a number using the string value of clue
+  var guess = prompt(clue);  
+  // Convert their guess to a number using +
+  guess = +guess;
+  
+  // Define base case
+  if (guess === number) {
+    return console.log("You got it! The number was " + number);
+  }
+  // Define first recursive case (guess is too low)
+  else if (guess < number) {
+          console.log("Too low");
+          guessNumber(number,clue);
+    
+  }
+  // Define second recursive case (guess is too high)
+  else if (guess > number) {
+    console.log("Too high");
+          guessNumber(number,clue);
+  }
+}
+
+
+guessNumber(5, "Guess a number between 4 and 9.");
+A game of guessing a number with use of recursion
+
+
+26)  // Here is the array we will store results in
+var multiples = [];
+
+
+function multiplesOf(base, i) { //multiples of base by i times ie base of 2; i = 3; = 2,4,6
+  // Base case
+  if (i===0) {
+        // Write the array multiples to the console
+        console.log(multiples);
+  }
+  // Recursive case
+  else {
+    multiples[i - 1] = base * i; //last index in array is first multiple
+        // Add a recursive function call
+        return multiplesOf(base,i-1);
+  }        
+}
+
+
+multiplesOf(2, 5);
+
+
+Demonstrates the usage of storing elements in arrays with recursion. In this case, the multiplication table
+
+
+27) // pick a random number between 1 and 6 for our roll of the die
+var die = Math.floor(Math.random()*6 + 1);
+var score;
+
+
+// this time make an if statement so that if the roll is 1 the score is 0
+score = die;
+if (die === 1){score =0;}
+console.log("You rolled a "+die+" for a score of "+score);
+Demonstrates the makings of a dice game with the usage of the javascript Math library and conditionals
+
+
+28)// pick a random number between 1 and 6 for our roll of the die
+var die1 = Math.floor(Math.random()*6 + 1);
+var die2 = Math.floor(Math.random()*6 + 1);
+var score = die1+die2;
+
+
+// this time if either dice roll is 1 then score should be 0
+// Otherwise, score should be the sum of the two dice
+if (die1 ===1 || die2===1){score =0;}
+
+
+console.log("You rolled a "+die1+" and a "+die2+" for a score of "+score);
+Demonstrates the dice game with two die
+
+
+29) // pick a random number between 1 and 6 for our roll of the die
+var die1 = Math.floor(Math.random()*6 + 1);
+var die2 = Math.floor(Math.random()*6 + 1);
+var score;
+
+
+// This time if either die roll is 1 then score should be 0 
+if (die1 ===1 || die2===1){score =0;}
+
+
+
+
+
+
+else if {die1 === die2}{
+  // here we need to check if there are doubles.  If so, score should be
+  // double the sum of the two dice
+  score === 2*(die1+die2);
+Implements a conditional so that if two doubles are rolled, the score is doubled
+
+
+30) <html>
+
+
+    <head>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+
+
+    <body>
+        <form name="myTravelForm">
+            <label>First Name:</label>
+            <input type="text" name="firstname" />
+            <label>Last Name:</label>
+            <input type="text" name="lastname" />
+
+
+            <select name="destination">
+                <option value="Antarctica" selected>Antarctica</option>
+                <option value="Costa Rica">Costa Rica</option>
+            </select>
+                <input type="button" value="Add this traveler" onClick="processTravelForm()"/>
+        </form>
+        
+        <div id="travelerInfo"></div>
+
+
+    </body>
+
+
+</html>
+function processTravelForm() {
+    var firstName = document.myTravelForm.firstname.value;
+    var lastName = document.myTravelForm.lastname.value;
+    var destination = document.myTravelForm.destination.value;
+    
+    var travelerInfo = '<div>First Name: ' + firstName + '</div>'
+    + '<div>Last Name: ' + lastName + '</div>' + '<div>Destination: '
+    + destination + '</div>';
+
+
+    document.getElementById("travelerInfo").innerHTML += travelerInfo;
+    
+}
+Demonstrate the combination of HTML and Javascript to produce a travelling program.  
+
+
+31)var languages = {
+    english: "Hello!",
+    french: "Bonjour!",
+    notALanguage: 4,
+    spanish: "Hola!"
+};
+
+
+// print hello in the 3 different languages
+for (var i in languages){
+        if (typeof languages[i] === "string"){
+                console.log (languages[i]);
+        }
+};
+Prints hello in 3 languages
+
+
+32)function Dog (breed) {
+    this.breed = breed;
+};
+
+
+// add the sayHello method to the Dog class 
+// so all dogs now can say hello
+Dog.prototype.sayHello = function (){console.log("Hello this is a " +this.breed + " dog");}
+
+
+var yourDog = new Dog("golden retriever");
+yourDog.sayHello();
+
+
+var myDog = new Dog("dachshund");
+myDog.sayHello();
+Demonstrates a use of .prototype to add methods to a class
+
+
+33)function StudentReport() {
+    var grade1 = 4;
+    var grade2 = 2;
+    var grade3 = 1;
+    var getGPA = function() {
+        return (this.grade1 + this.grade2 + this.grade3) / 3;
+    };
+}
+
+
+var myStudentReport = new StudentReport();
+
+
+for(var x in myStudentReport) {
+    if(typeof myStudentReport[x] !== "function") {
+        console.log("Muahaha! "+myStudentReport[x]);
+    }
+}
+
+
+console.log("Your overall GPA is "+myStudentReport.getGPA());
+A basic GPA calculator
+
+
+34)// complete these definitions so that they will have
+// the appropriate types
+var anObj = { job: "I'm an object!" };
+var aNumber = 42;
+var aString = "I'm a string!";
+
+
+console.log( typeof anObj); // should print "object"
+console.log(typeof aNumber  ); // should print "number"
+console.log(typeof aString  ); // should print "string"
+Demonstrates a usage of typeof
+
+
+35)var nyc = {
+    fullName: "New York City",
+    mayor: "Michael Bloomberg",
+    population: 8000000,
+    boroughs: 5
+};
+
+
+// write your for-in loop here
+for (var i in nyc){console.log(i);}
+Demonstrates a usage of for-in loops
+
+
+36)var nyc = {
+    fullName: "New York City",
+    mayor: "Michael Bloomberg",
+    population: 8000000,
+    boroughs: 5
+};
+
+
+// write a for-in loop to print the value of nyc's properties
+for (i in nyc){
+        console.log(nyc[i]);
+}
+Shows how for-in loops can cycle through properties in an object
+
+
+37)function Person(name,age) {
+  this.name = name;
+  this.age = age;
+};
+
+
+// Let's make bob again, using our constructor
+var bob = new Person("Bob Smith", 30);
+var susan = new Person("Susan Jordan", 35);
+
+
+// make your own class here
+function Circle(radius){
+        this.radius = radius;
+Demonstrates the steps to creating a class, and with it, objects
+
+
+
+
+38)function Cat(name, breed) {
+    this.name = name;
+    this.breed = breed;
+}
+
+
+// let's make some cats!
+var cheshire = new Cat("Cheshire Cat", "British Shorthair");
+var gary = new Cat("Gary", "Domestic Shorthair");
+
+
+// add a method "meow" to the Cat class that will allow
+// all cats to print "Meow!" to the console
+Cat.prototype.meow = function(){console.log("Meow!");};
+
+
+// add code here to make the cats meow!
+cheshire.meow();
+gary.meow();
+Explains how to spread methods from class to class with usage of prototype
+
+
+39)// the original Animal class and sayName method
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+}
+Animal.prototype.sayName = function() {
+    console.log("Hi my name is "+this.name);
+};
+
+
+// define a Penguin class
+function Penguin (name){this.numLegs = 2; this.name = name;}
+
+
+// set its prototype to be a new instance of Animal
+Penguin.prototype = new Animal();
+Penguin.sayName();
+Demonstrates how to use another class as a template for a new class with usage of prototype
+
+
+40)// original classes
+function Animal(name, numLegs) {
+    this.name = name;
+    this.numLegs = numLegs;
+    this.isAlive = true;
+}
+function Penguin(name) {
+    this.name = name;
+    this.numLegs = 2;
+}
+function Emperor(name) {
+    this.name = name;
+    this.saying = "Waddle waddle";
+}
+
+
+// set up the prototype chain
+Penguin.prototype = new Animal();
+Emperor.prototype = new Penguin();
+
+
+var myEmperor = new Emperor("Jules");
+
+
+console.log( myEmperor.saying ); // should print "Waddle waddle"
+console.log(myEmperor.numLegs  ); // should print 2
+console.log( myEmperor.isAlive ); // should print true
+Sets properties to different classes and shows how to output them
+
+
+41)function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+}
+
+
+// create your Person 
+var john = new Person("nakagawa", "l", 60);
+
+
+// try to print his bankBalance
+console.log(john.bankBalance);
+Demonstrates how to hide variables from the user
+
+
+42)function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+  
+   this.getBalance = function() {
+      // your code should return the bankBalance
+      return bankBalance;
+   };
+}
+
+
+var john = new Person('John','Smith',30);
+console.log(john.bankBalance);
+
+
+// create a new variable myBalance that calls getBalance()
+myBalance = john.getBalance();
+console.log(myBalance);
+Demonstrates a way to access hidden variables
+
+
+43) function Person(first,last,age) {
+   this.firstname = first;
+   this.lastname = last;
+   this.age = age;
+   var bankBalance = 7500;
+  
+   this.askTeller = function(pass) {
+     if (pass == 1234) return bankBalance;
+     else return "Wrong password.";
+   };
+}
+
+
+var john = new Person('John','Smith',30);
+/* the variable myBalance should access askTeller()
+   with a password as an argument  */
+var myBalance = john.askTeller(1234);
+Sets up a password style function in order to gain access to a variable
+
+
+44) var card = Math.floor(Math.random())*52 +1;
+Demonstrates a usage of the javascript Math library to generate a random card from a deck
+
+
+45)function deal(){return Math.floor(Math.random()*52)+1;}
+
+
+// Declare two variables 
+// For both variables, assign values gotten by calling the function
+var card1 = deal();
+var card2 = deal();
+
+
+deal();
+Deals 2 cards from a deck
+
+
+46) // Our deal function will return one random card
+
+
+
+
+function deal(){return Math.floor(Math.random()*52)+1;}
+
+
+// Declare our two variables card1 and card2
+var card1 = deal();
+var card2 = deal();
+
+
+// Define a function called score, which will assign points by
+// adding up the cards: 
+function score(){return card1 + card2;}
+Adds in a score function to determine the score of your hand
+
+
+47) // Our deal function will return a random card
+
+
+function deal() {
+    card = Math.floor(Math.random()*52+1);
+    return card;}
+
+
+// Deal out our first hand by declaring variables card1 and card2
+
+
+var card1 = deal();
+var card2 = deal();
+
+
+
+
+
+
+function getValue(card){return card%13;}
+
+
+// Return the score of our hand
+
+
+function score(){return getValue(card1) + getValue(card2);}
+
+
+console.log("You have cards " + card1 + " and " + card2 +
+        " for a score of " + score());
+Returns the value of individual cards
+
+
+48) // Our deal function will return a random card
+var deal = function () {
+    card = Math.floor(Math.random()*52+1);
+    return card;
+};
+
+
+// Deal out our first hand
+var card1 = deal();
+var card2 = deal();
+
+
+// This function takes a card as a parameter and returns the value
+// of that card
+var getValue = function(card) {
+    // if its a face card, number should be set to 10
+    if( card%13 === 11 || card%13 === 12 ||card%13 === 0   ) {
+        return 10;
+    }
+    // Otherwise number should be set to card modulo 13
+    else {
+        return card % 13;
+    }
+};
+
+
+// Here make a function called score, which will assign points based
+// on the cards.  It should take the remainder
+var score = function() {
+    return getValue(card1) + getValue(card2);
+};
+
+
+console.log("You have cards " + card1 + " and " + card2 +
+        " for a score of " + score());
+Accounts for face cards in this revised code
+
+
+49) // Our deal function will return a random card
+var deal = function() {
+  card = Math.floor(Math.random()*52+1);
+  return card;
+};
+
+
+// Deal out our first hand
+var card1 = deal();
+var card2 = deal();
+
+
+// This function takes a card as a parameter and returns the value
+// of that card
+var getValue = function(card) {
+  // if its a face card, number should be set to 10
+   if( card%13 === 11 || card%13 === 12 ||card%13 === 0   ) {
+        return 10;
+    }
+    
+  // What if it's an ace?
+ else if( card%13 === 1 ) {
+        return 11;
+    }
+  // Otherwise, we just want its number value
+  else {return card%13;}
+}
+        
+// Score the hand
+function score() {
+  return getValue(card1) + getValue(card2);
+}
+
+
+console.log("You have cards " + card1 + " and " + card2 +
+        " for a score of " + score(card1, card2));
+Implements the unique usage of Aces in Blackjack
+
+
+50)function factorial(n) {
+  if (n === 0) {
+    return 1;
+  }
+  
+  // This is it! Recursion!!
+  return n * factorial(n - 1);
+}
+
+
+factorial(10);
+Demonstrates how to create a factorial function
+
+
+51)  function factorial(n) {
+  if (n < 0) {
+    // Termination condition to prevent infinite recursion
+    return console.log("negative numbers are not allowed.");
+    
+  }
+  // Base case
+  if (n === 0) {
+    return 1;
+  }
+  // Recursive case
+  return n * factorial(n -1);
+}
+
+
+factorial(-1);
+factorial(5);
+
+
+Demonstrates the base case and termination case in recursive functions
+
+
+52) // Create an empty array called "stack"
+var stack = [];
+// Here is our recursive function
+function power(base, exponent) {
+  // Base case 
+  if ( exponent === 0 ) {
+    return 1;
+  }
+  // Recursive case
+  else {
+        stack[exponent -1] = base * power(base, exponent - 1);
+    return         stack[exponent -1];
+  }
+}
+power(5,2);
+console.log(stack);
+Applies recursion to cycle through elements and secondary arrays in arrays
+
+
+53)  // Our array of messy words
+var capitals = ["berlin", "parIs", "MaDRiD"];
+
+
+// Capitalize function
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+
+// Our recursive function
+function fixLetterCase(array, i) {    //i=beginning index
+  // Base case
+  if (i === array.length) {
+    return; //return at end of word
+  } 
+  // Action
+  array[i] = capitalize(array[i]);
+  // Recursive case
+  return fixLetterCase(array, i + 1);
+}
+
+
+// Here is our function call
+fixLetterCase(capitals, 0);
+
+
+console.log(capitals);
+Demonstrates how recursion in arrays can be used to punctualize sentences or words
+
+
+54)  var capitals = [ ["berlin", "parIs", "MaDRiD"], 
+                 ["monTEvideo", "BrASiLia"],
+                 ["dElhi", "toKYo", "BeiJing"],
+                 ["CanBerra"],
+                 ["kiGaLi", "pretoRIA"] ];
+
+
+// Capitalize function
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+
+// Our recursive function
+function fixLetterCase(array, x, y) { //y is outside, x is inside array
+  if (y === array.length) { //if ouside array is done, return
+    return;
+  }
+  else if (x === array[y].length) { //if the inside array is at its end, increase outside array by 1
+    return fixLetterCase(array, 0, y + 1);
+  }
+  else { //otherwise, capitalize each index, ie (array[0][0] is now capitalized)
+    array[y][x] = capitalize(array[y][x]);
+    return fixLetterCase(array, x + 1, y);  //proceed with recursion, with inside array incremented
+  }        
+}
+
+
+fixLetterCase(capitals, 0, 0);
+
+
+console.log(capitals);
+Demonstrates how this can even apply to nested arrays
+
+
+55)  function guessNumber(number, clue) {
+  // Prompt the user for a number using the string value of clue
+  var guess = prompt(clue);  
+  // Convert their guess to a number using +
+  guess = +guess;
+  
+  // Define base case
+  if (guess === number) {
+    return console.log("You got it! The number was " + number);
+  }
+  // Define first recursive case (guess is too low)
+  else if (guess < number) {
+          console.log("Too low");
+          guessNumber(number,clue);
+    
+  }
+  // Define second recursive case (guess is too high)
+  else if (guess > number) {
+    console.log("Too high");
+          guessNumber(number,clue);
+  }
+}
+
+
+guessNumber(5, "Guess a number between 4 and 9.");
+A game of guessing a number with use of recursion
+
+
+56)  // Here is the array we will store results in
+var multiples = [];
+
+
+function multiplesOf(base, i) { //multiples of base by i times ie base of 2; i = 3; = 2,4,6
+  // Base case
+  if (i===0) {
+        // Write the array multiples to the console
+        console.log(multiples);
+  }
+  // Recursive case
+  else {
+    multiples[i - 1] = base * i; //last index in array is first multiple
+        // Add a recursive function call
+        return multiplesOf(base,i-1);
+  }        
+}
+
+
+multiplesOf(2, 5);
+
+
+Demonstrates the usage of storing elements in arrays with recursion. In this case, the multiplication table
+
+
+57) // pick a random number between 1 and 6 for our roll of the die
+var die = Math.floor(Math.random()*6 + 1);
+var score;
+
+
+// this time make an if statement so that if the roll is 1 the score is 0
+score = die;
+if (die === 1){score =0;}
+console.log("You rolled a "+die+" for a score of "+score);
+Demonstrates the makings of a dice game with the usage of the javascript Math library and conditionals
+
+
+58)// pick a random number between 1 and 6 for our roll of the die
+var die1 = Math.floor(Math.random()*6 + 1);
+var die2 = Math.floor(Math.random()*6 + 1);
+var score = die1+die2;
+
+
+// this time if either dice roll is 1 then score should be 0
+// Otherwise, score should be the sum of the two dice
+if (die1 ===1 || die2===1){score =0;}
+
+
+console.log("You rolled a "+die1+" and a "+die2+" for a score of "+score);
+Demonstrates the dice game with two die
+
+
+59) // pick a random number between 1 and 6 for our roll of the die
+var die1 = Math.floor(Math.random()*6 + 1);
+var die2 = Math.floor(Math.random()*6 + 1);
+var score;
+
+
+// This time if either die roll is 1 then score should be 0 
+if (die1 ===1 || die2===1){score =0;}
+
+
+
+
+
+
+else if {die1 === die2}{
+  // here we need to check if there are doubles.  If so, score should be
+  // double the sum of the two dice
+  score === 2*(die1+die2);
+Implements a conditional so that if two doubles are rolled, the score is doubled
+
+
+60) <html>
+
+
+    <head>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+
+
+    <body>
+        <form name="myTravelForm">
+            <label>First Name:</label>
+            <input type="text" name="firstname" />
+            <label>Last Name:</label>
+            <input type="text" name="lastname" />
+
+
+            <select name="destination">
+                <option value="Antarctica" selected>Antarctica</option>
+                <option value="Costa Rica">Costa Rica</option>
+            </select>
+                <input type="button" value="Add this traveler" onClick="processTravelForm()"/>
+        </form>
+        
+        <div id="travelerInfo"></div>
+
+
+    </body>
+
+
+</html>
+function processTravelForm() {
+    var firstName = document.myTravelForm.firstname.value;
+    var lastName = document.myTravelForm.lastname.value;
+    var destination = document.myTravelForm.destination.value;
+    
+    var travelerInfo = '<div>First Name: ' + firstName + '</div>'
+    + '<div>Last Name: ' + lastName + '</div>' + '<div>Destination: '
+    + destination + '</div>';
+
+
+    document.getElementById("travelerInfo").innerHTML += travelerInfo;
+    
+}
+Demonstrate the combination of HTML and Javascript to produce a travelling program.
